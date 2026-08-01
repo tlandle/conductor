@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conductor: Scalable Edge-assisted Fusion and Path Prediction for Connected Autonomous Vehicles</title>
+<meta name="description" content="Conductor is a deadline-aware edge service for cooperative motion prediction, appearing at ACM/IEEE SEC 2026.">
+<style>
+  :root { --accent:#1e3c78; --ink:#20242c; --muted:#6e6e6e; --light:#f4f6fa; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI', Helvetica, Arial, sans-serif; color:var(--ink); line-height:1.6; }
+  .container { max-width:900px; margin:0 auto; padding:0 1.2rem; }
+  header { padding:3.2rem 0 2rem; text-align:center; }
+  h1 { font-size:2.0rem; line-height:1.25; margin-bottom:0.4rem; }
+  h1 .name { color:var(--accent); }
+  .venue { font-size:1.15rem; color:var(--accent); font-weight:600; margin:0.8rem 0 0.2rem; }
+  .authors { margin-top:0.9rem; font-size:1.05rem; }
+  .authors a { color:var(--ink); text-decoration:none; border-bottom:1px dotted var(--muted); }
+  .affil { color:var(--muted); font-size:0.95rem; margin-top:0.2rem; }
+  .buttons { display:flex; flex-wrap:wrap; gap:0.6rem; justify-content:center; margin:1.4rem 0 0; }
+  .btn { display:inline-block; padding:0.5rem 1.1rem; border-radius:2rem; background:var(--ink);
+         color:#fff; text-decoration:none; font-size:0.95rem; }
+  .btn.soon { background:var(--muted); cursor:default; }
+  .btn:hover:not(.soon) { background:var(--accent); }
+  section { padding:1.6rem 0; }
+  section.alt { background:var(--light); }
+  h2 { font-size:1.4rem; color:var(--accent); margin-bottom:0.8rem; }
+  p + p { margin-top:0.8rem; }
+  figure { margin:1.2rem 0; text-align:center; }
+  figure img { max-width:100%; height:auto; border:1px solid #e2e6ee; border-radius:6px; }
+  figcaption { font-size:0.9rem; color:var(--muted); margin-top:0.5rem; text-align:left; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+  @media (max-width:700px){ .grid2 { grid-template-columns:1fr; } }
+  ol.contrib { margin:0.6rem 0 0 1.2rem; }
+  ol.contrib li { margin-bottom:0.55rem; }
+  pre { background:#f0f1f4; border:1px solid #e2e6ee; border-radius:6px; padding:1rem;
+        overflow-x:auto; font-size:0.85rem; }
+  footer { padding:2rem 0 2.6rem; text-align:center; color:var(--muted); font-size:0.9rem; }
+</style>
+</head>
+<body>
+
+<header class="container">
+  <h1><span class="name">Conductor</span>: Scalable Edge-assisted Fusion and Path Prediction for Connected Autonomous Vehicles</h1>
+  <div class="venue">ACM/IEEE Symposium on Edge Computing (SEC), 2026 &mdash; to appear</div>
+  <div class="authors">
+    <a href="https://tlandle.github.io/">Tyler Landle</a> et al.
+    <!-- TODO: full author list for camera-ready -->
+  </div>
+  <div class="affil">Georgia Institute of Technology</div>
+  <div class="buttons">
+    <span class="btn soon">Paper (proceedings, 2026)</span>
+    <span class="btn soon">Extended version (arXiv, coming soon)</span>
+    <a class="btn" href="https://arxiv.org/abs/2506.16535">eCAV platform (arXiv)</a>
+    <a class="btn" href="#bibtex">BibTeX</a>
+  </div>
+</header>
+
+<section class="container">
+  <figure>
+    <img src="static/fig_cliff_per_stage.png" alt="The deadline cliff: p95 age of information crosses the 300 ms bound beyond 17 participating vehicles.">
+    <figcaption><b>The deadline cliff.</b> Composing fusion, tracking, and trajectory prediction on edge hardware, fusion cost grows with the number of participating vehicles and p95 age of information crosses the 300&nbsp;ms safety bound beyond 17 CAVs. Conductor exists to keep the shared world model on the safe side of this cliff.</figcaption>
+  </figure>
+</section>
+
+<section class="alt">
+  <div class="container">
+    <h2>Abstract</h2>
+    <p>The planning algorithms inside an autonomous vehicle rely on on-board sensors whose line of sight is limited by traffic and occlusions. Edge-assisted creation of a unified world model, fusing information from connected autonomous vehicles (CAVs) and roadside units (RSUs) in a geographic locale, and the prediction of future trajectories can enhance planning; but this shared information is useful only if it reaches each vehicle planner within a tight Age of Information (AoI) budget. The state of the art fuses per vehicle: each CAV fuses inputs from other actors locally, which limits both scalability with actor count and quality of results.</p>
+    <p>We present <b>Conductor</b>, an edge service that creates a unified world model from the perspective of a fixed anchor (an RSU) in a locale and predicts future trajectories of the actors in it. Conductor adheres to the AoI budget by dynamically limiting the number of contributing vehicles to those that add the most evidence beyond the RSU's view, using an occlusion-aware selector built from confidence maps the fusion model already produces, paired with a runtime controller that adapts both the number of fused inputs and the amount of fresh trajectory prediction each cycle. Across evaluated traffic scenarios with up to 31 CAVs, the joint selector-controller meets the AoI safety bound, with fusion fidelity close to an Oracle and much better than a random selector under the same constraint.</p>
+  </div>
+</section>
+
+<section class="container">
+  <h2>Contributions</h2>
+  <ol class="contrib">
+    <li><b>Measurement.</b> A characterization of the <i>deadline cliff</i>: the composed perception, tracking, and prediction pipeline overruns its planner-consumed AoI budget as participation grows, crossing the 300&nbsp;ms bound beyond 17 CAVs.</li>
+    <li><b>Architecture.</b> One shared, RSU-anchored, locale-wide execution &mdash; WorldFusion intermediate fusion, persistent tracking, and learned prediction &mdash; producing tracks and future trajectories multicast to every planner, instead of per-vehicle rebuilds.</li>
+    <li><b>Control and evaluation.</b> Occlusion-aware contributor admission and deadline-aware prediction refresh, keeping the service inside the freshness envelope across traffic density and validated in closed-loop driving.</li>
+  </ol>
+</section>
+
+<section class="alt">
+  <div class="container">
+    <h2>Results</h2>
+    <div class="grid2">
+      <figure>
+        <img src="static/fig_cross_scale_compliance.png" alt="AoI compliance across participant density.">
+        <figcaption><b>Timeliness across density.</b> Joint control is the only evaluated policy holding the AoI bound across the native Multi-V2X density distribution.</figcaption>
+      </figure>
+      <figure>
+        <img src="static/fig_selector_comparison.png" alt="Selector recall versus contributor count at the high-occlusion locale.">
+        <figcaption><b>Selection quality.</b> At a high-occlusion locale, four well-selected contributors close 87% of the random-to-Oracle gap on RSU-occluded recall.</figcaption>
+      </figure>
+    </div>
+    <figure>
+      <img src="static/fig_closed_loop_matrix.png" alt="Closed-loop success across visibility and load conditions.">
+      <figcaption><b>Closed-loop driving outcomes.</b> Late fusion fails under occlusion; static full fusion fails under load; Conductor preserves cooperative sensing benefits in every cell.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="container" id="bibtex">
+  <h2>Citation</h2>
+  <pre>@inproceedings{landle2026conductor,
+  title     = {Scalable Edge-assisted Fusion and Path Prediction
+               for Connected Autonomous Vehicles},
+  author    = {Landle, Tyler and others},
+  booktitle = {Proceedings of the ACM/IEEE Symposium on Edge Computing (SEC)},
+  year      = {2026},
+  note      = {To appear}
+}</pre>
+</section>
+
+<footer>
+  Conductor is built on the <a href="https://arxiv.org/abs/2506.16535">eCAV</a> evaluation platform.<br>
+  Embedded Pervasive Lab, Georgia Institute of Technology.
+</footer>
+
+</body>
+</html>
