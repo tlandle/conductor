@@ -42,7 +42,7 @@
 
 <header class="container">
   <h1><span class="name">Conductor</span>: Scalable Edge-assisted Fusion and Path Prediction for Connected Autonomous Vehicles</h1>
-  <div class="venue">ACM/IEEE Symposium on Edge Computing (SEC), 2026 &mdash; to appear</div>
+  <div class="venue">ACM/IEEE Symposium on Edge Computing (SEC), 2026. To appear.</div>
   <div class="authors">
     <a href="https://tlandle.github.io/">Tyler Landle</a>, Jackson Isenberg, Chandramouli Amarnath, Abhijit Chatterjee, Alexandros Daglis, Umakishore Ramachandran
   </div>
@@ -58,7 +58,7 @@
 <section class="container">
   <figure>
     <img src="static/fig_cliff_per_stage.png" alt="The deadline cliff: p95 age of information crosses the 300 ms bound beyond 17 participating vehicles.">
-    <figcaption><b>The deadline cliff.</b> Composing fusion, tracking, and trajectory prediction on edge hardware, fusion cost grows with the number of participating vehicles and p95 age of information crosses the 300&nbsp;ms safety bound beyond 17 CAVs. Conductor exists to keep the shared world model on the safe side of this cliff.</figcaption>
+    <figcaption><b>The deadline cliff.</b> When fusion, tracking, and trajectory prediction compose on edge hardware, fusion cost grows with the number of participating vehicles and p95 age of information crosses the 300&nbsp;ms safety bound beyond 17 CAVs. Conductor keeps the shared world model on the safe side of this cliff.</figcaption>
   </figure>
 </section>
 
@@ -74,7 +74,7 @@
   <h2>Contributions</h2>
   <ol class="contrib">
     <li><b>Measurement.</b> A characterization of the <i>deadline cliff</i>: the composed perception, tracking, and prediction pipeline overruns its planner-consumed AoI budget as participation grows, crossing the 300&nbsp;ms bound beyond 17 CAVs.</li>
-    <li><b>Architecture.</b> One shared, RSU-anchored, locale-wide execution &mdash; WorldFusion intermediate fusion, persistent tracking, and learned prediction &mdash; producing tracks and future trajectories multicast to every planner, instead of per-vehicle rebuilds.</li>
+    <li><b>Architecture.</b> One shared, RSU-anchored, locale-wide execution of WorldFusion intermediate fusion, persistent tracking, and learned prediction, producing tracks and future trajectories multicast to every planner, instead of per-vehicle rebuilds.</li>
     <li><b>Control and evaluation.</b> Occlusion-aware contributor admission and deadline-aware prediction refresh, keeping the service inside the freshness envelope across traffic density and validated in closed-loop driving.</li>
   </ol>
 </section>
