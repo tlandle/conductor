@@ -50,7 +50,8 @@
   <div class="buttons">
     <span class="btn soon">Paper (proceedings, 2026)</span>
     <span class="btn soon">Extended version (arXiv, coming soon)</span>
-    <a class="btn" href="https://arxiv.org/abs/2506.16535">eCAV platform (arXiv)</a>
+    <a class="btn" href="https://github.com/tlandle/eCAV">Code (eCAV platform)</a>
+    <a class="btn" href="https://arxiv.org/abs/2506.16535">eCAV paper (arXiv)</a>
     <a class="btn" href="#bibtex">BibTeX</a>
   </div>
 </header>
@@ -58,7 +59,7 @@
 <section class="container">
   <figure>
     <img src="static/fig_cliff_per_stage.png" alt="The deadline cliff: p95 age of information crosses the 300 ms bound beyond 17 participating vehicles.">
-    <figcaption><b>The deadline cliff.</b> When fusion, tracking, and trajectory prediction compose on edge hardware, fusion cost grows with the number of participating vehicles and p95 age of information crosses the 300&nbsp;ms safety bound beyond 17 CAVs. Conductor keeps the shared world model on the safe side of this cliff.</figcaption>
+    <figcaption><b>The deadline cliff.</b> The baseline fuses every available vehicle on each update and runs on edge-class hardware. Fusion cost grows with the number of participating vehicles. Stacked bars show mean per-component latency and diamonds show p95 age of information, which crosses the 300&nbsp;ms bound between 17 and 19 vehicles.</figcaption>
   </figure>
 </section>
 
@@ -85,16 +86,16 @@
     <div class="grid2">
       <figure>
         <img src="static/fig_cross_scale_compliance.png" alt="AoI compliance across participant density.">
-        <figcaption><b>Timeliness across density.</b> Joint control is the only evaluated policy holding the AoI bound across the native Multi-V2X density distribution.</figcaption>
+        <figcaption><b>Compliance across density.</b> AoI compliance per participant count over the native Multi-V2X density distribution. The joint controller is the only evaluated policy that holds the 300&nbsp;ms bound at every density bin.</figcaption>
       </figure>
       <figure>
         <img src="static/fig_selector_comparison.png" alt="Selector recall versus contributor count at the high-occlusion locale.">
-        <figcaption><b>Selection quality.</b> At a high-occlusion locale, four well-selected contributors close 87% of the random-to-Oracle gap on RSU-occluded recall.</figcaption>
+        <figcaption><b>Contributor selection.</b> Total and RSU-occluded recall versus contributor count at a high-occlusion locale. At four contributors the occlusion-aware selector reaches 87% of the improvement available between random selection and the Oracle.</figcaption>
       </figure>
     </div>
     <figure>
       <img src="static/fig_closed_loop_matrix.png" alt="Closed-loop success across visibility and load conditions.">
-      <figcaption><b>Closed-loop driving outcomes.</b> Late fusion fails under occlusion; static full fusion fails under load; Conductor preserves cooperative sensing benefits in every cell.</figcaption>
+      <figcaption><b>Closed-loop driving outcomes.</b> Scenario success across the visibility and load matrix. Late fusion misses occluded threats. Fusing all vehicles breaches the deadline under load. The joint controller succeeds in every cell.</figcaption>
     </figure>
   </div>
 </section>
@@ -113,7 +114,7 @@
 </section>
 
 <footer>
-  Conductor is built on the <a href="https://arxiv.org/abs/2506.16535">eCAV</a> evaluation platform.<br>
+  Conductor is built on the eCAV evaluation platform: <a href="https://github.com/tlandle/eCAV">code</a>, <a href="https://arxiv.org/abs/2506.16535">paper</a>.<br>
   Embedded Pervasive Lab, Georgia Institute of Technology.
 </footer>
 
